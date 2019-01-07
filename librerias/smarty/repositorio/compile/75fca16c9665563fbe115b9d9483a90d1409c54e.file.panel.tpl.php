@@ -1,20 +1,22 @@
-<?php /* Smarty version Smarty-3.1.11, created on 2018-08-23 22:47:06
+<?php /* Smarty version Smarty-3.1.11, created on 2019-01-06 12:34:30
          compiled from "templates/plantillas/modulos/usuarios/panel.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:6940739095b7f7fba8675c7-87367976%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:5704117695c3175d299b172-31444664%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '75fca16c9665563fbe115b9d9483a90d1409c54e' => 
     array (
       0 => 'templates/plantillas/modulos/usuarios/panel.tpl',
-      1 => 1531346456,
+      1 => 1546799657,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '6940739095b7f7fba8675c7-87367976',
+  'nocache_hash' => '5704117695c3175d299b172-31444664',
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.11',
+  'unifunc' => 'content_5c3175d2a84f80_45753473',
   'variables' => 
   array (
     'perfiles' => 0,
@@ -22,37 +24,32 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'item' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.11',
-  'unifunc' => 'content_5b7f7fba913470_14130063',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5b7f7fba913470_14130063')) {function content_5b7f7fba913470_14130063($_smarty_tpl) {?><div class="row">
+<?php if ($_valid && !is_callable('content_5c3175d2a84f80_45753473')) {function content_5c3175d2a84f80_45753473($_smarty_tpl) {?><div class="row">
 	<div class="col-md-12">
-		<h1 class="page-header">
-			Usuarios
-		</h1>
+		<h1 class="page-header">Administración de usuarios</h1>
 	</div>
 </div>
 
-<ul id="panelTabs" class="nav nav-pills">
-  <li class="nav-item">
-  	<a class="nav-link active" role="tab" data-toggle="pill" href="#listas">Lista</a>
-  </li>
-  <li class="nav-item"><a class="nav-link" data-toggle="pill" href="#add">Agregar o Modificar</a></li>
+<ul id="panelTabs" class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#listas">Lista</a></li>
+  <li><a data-toggle="tab" href="#add">Agregar o Modificar</a></li>
 </ul>
 
 <div class="tab-content">
-	<div id="listas" class="tab-pane container active">
+	<div id="listas" class="tab-pane fade in active">
 		<div id="dvLista">
+			
 		</div>
 	</div>
 	
-	<div id="add" class="tab-pane container">
+	<div id="add" class="tab-pane fade">
 		<form role="form" id="frmAdd" class="form-horizontal" onsubmit="javascript: return false;">
-			<div class="card">
-				<div class="card-body">
-					<div class="form-group row">
-						<label for="selTipo" class="col-md-2">Perfil</label>
-						<div class="col-md-4">
+			<div class="box">
+				<div class="box-body">			
+					<div class="form-group">
+						<label for="selPerfil" class="col-md-2">Perfil</label>
+						<div class="col-md-6">
 							<select class="form-control" id="selPerfil" name="selPerfil">
 								<?php  $_smarty_tpl->tpl_vars['item'] = new Smarty_Variable; $_smarty_tpl->tpl_vars['item']->_loop = false;
  $_smarty_tpl->tpl_vars['key'] = new Smarty_Variable;
@@ -63,33 +60,39 @@ $_smarty_tpl->tpl_vars['item']->_loop = true;
 ?>
 									<option value="<?php echo $_smarty_tpl->tpl_vars['key']->value;?>
 "><?php echo $_smarty_tpl->tpl_vars['item']->value;?>
-</option>
+
 								<?php } ?>
 							</select>
 						</div>
 					</div>
-					<div class="form-group row">
-						<label for="txtNombre" class="col-md-2">Nombre</label>
+					<div class="form-group">
+						<label for="txtNombre" class="col-md-2">Nombre completo</label>
 						<div class="col-md-6">
 							<input class="form-control" id="txtNombre" name="txtNombre">
 						</div>
 					</div>
-					<div class="form-group row">
-						<label for="txtEmail" class="col-md-2">Correo electrónico</label>
-						<div class="col-md-3">
-							<input class="form-control" id="txtEmail" name="txtEmail" type="email">
+					<div class="form-group">
+						<label for="txtRFC" class="col-md-2">RFC</label>
+						<div class="col-md-6">
+							<input class="form-control" id="txtRFC" name="txtRFC" type="text">
 						</div>
 					</div>
-					<div class="form-group row">
+					<div class="form-group">
+						<label for="txtCorreo" class="col-md-2">Correo electrónico</label>
+						<div class="col-md-6">
+							<input class="form-control" id="txtCorreo" name="txtCorreo" type="email">
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="txtPass" class="col-md-2">Contraseña</label>
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<input class="form-control" id="txtPass" name="txtPass" type="password">
 						</div>
 					</div>
 				</div>
-				<div class="card-footer">
-					<button type="submit" class="btn btn-primary">Guardar</button>
+				<div class="box-footer">
 					<button type="reset" id="btnReset" class="btn btn-default">Cancelar</button>
+					<button type="submit" class="btn btn-info pull-right">Guardar</button>
 					<input type="hidden" id="id"/>
 				</div>
 			</div>

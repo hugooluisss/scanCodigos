@@ -14,11 +14,11 @@ switch($objModulo->getId()){
 		
 		$smarty->assign("perfiles", $datos);
 	break;
-	case 'listaUsuarios':
+	case 'listausuarios':
 		$db = TBase::conectaDB();
 		global $sesion;
 		
-		$sql = "select * from usuario a where a.visible = true";
+		$sql = "select a.*, b.nombre as perfil from usuario a join perfil b using(idPerfil) where a.visible = true";
 		
 		$rs = $db->query($sql) or errorMySQL($db, $sql);
 		$datos = array();
@@ -35,13 +35,13 @@ switch($objModulo->getId()){
 				$db = TBase::conectaDB();
 				$obj = new TUsuario();
 				
-				$rs = $db->query("select idUsuario from usuario where email = '".$_POST['clave']."'");
+				$rs = $db->query("select idUsuario from usuario where email = '".$_POST['email']."'");
 				
 				if ($rs->num_rows > 0){ #si es que encontró la clave
 					$row = $rs->fetch_assoc();
 					if ($row["idUsuario"] <> $_POST['id']){
 						$obj->setId($row['idUsuario']);
-						echo json_encode(array("band" => false, "mensaje" => "El correo ya se encuentra registrado con el usuario ".$obj->getNombreCompleto()));
+						echo json_encode(array("band" => false, "mensaje" => "El correo ya se encuentra registrado con el usuario ".$obj->getNombre()));
 						exit(1);
 					}
 				}
@@ -53,6 +53,7 @@ switch($objModulo->getId()){
 				$obj->setEmail($_POST['email']);
 				$obj->setPass($_POST['pass']);
 				$obj->setPerfil($_POST['perfil']);
+				$obj->setRFC($_POST['rfc']);
 				$band = $obj->guardar();
 				
 				$smarty->assign("json", array("band" => $band));
@@ -61,12 +62,12 @@ switch($objModulo->getId()){
 				$obj = new TUsuario($_POST['usuario']);
 				$smarty->assign("json", array("band" => $obj->eliminar()));
 			break;
-			case 'validarEmail':
+			case 'validaUsuario':
 				$db = TBase::conectaDB();
-				if ($_POST['id'] == '')
-					$rs = $db->query("select idUsuario from usuario where upper(email) = upper('".$_POST['txtEmail']."')");
+				if ($_POST['usuario'] == '')
+					$rs = $db->query("select idUsuario from usuario where upper(email) = upper('".$_POST['txtCorreo']."')");
 				else
-					$rs = $db->query("select idUsuario from usuario where upper(email) = upper('".$_POST['txtEmail']."') and not idUsuario = ".$_POST['id']);
+					$rs = $db->query("select idUsuario from usuario where upper(email) = upper('".$_POST['txtCorreo']."') and not idUsuario = ".$_POST['usuario']);
 					
 				echo $rs->num_rows == 0?"true":"false";
 			break;

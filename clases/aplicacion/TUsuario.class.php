@@ -12,6 +12,7 @@ class TUsuario{
 	private $nombre;
 	private $email;
 	private $pass;
+	private $rfc;
 	private $visible;
 	
 	/**
@@ -184,6 +185,32 @@ class TUsuario{
 	}
 	
 	/**
+	* Establece el valor del rfc
+	*
+	* @autor Hugo
+	* @access public
+	* @param string $val Valor a asignar
+	* @return boolean True si se realizó sin problemas
+	*/
+	
+	public function setRFC($val = ''){
+		$this->rfc = $val;
+		return true;
+	}
+	
+	/**
+	* Retorna el rfc
+	*
+	* @autor Hugo
+	* @access public
+	* @return string Texto
+	*/
+	
+	public function getRFC(){
+		return $this->rfc;
+	}
+	
+	/**
 	* Guarda los datos en la base de datos, si no existe un identificador entonces crea el objeto
 	*
 	* @autor Hugo
@@ -213,7 +240,8 @@ class TUsuario{
 				idPerfil = ".$this->getPerfil().",
 				nombre = '".$this->getNombre()."',
 				email = '".$this->getEmail()."',
-				pass = '".$this->getPass()."'
+				pass = '".$this->getPass()."',
+				rfc = '".$this->getRFC()."'
 			WHERE idUsuario = ".$this->getId();
 		$rs = $db->query($sql) or errorMySQL($db, $sql);
 			

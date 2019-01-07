@@ -10,12 +10,7 @@ TUsuario = function(){
 				"email": datos.email, 
 				"pass": datos.pass,
 				"perfil": datos.perfil,
-				"empresa": datos.empresa,
-				"transportista": datos.transportista,
-				"nit": datos.nit,
-				"celular": datos.celular,
-				"patentecamion": datos.patentecamion,
-				"patenterampla": datos.patenterampla,
+				"rfc": datos.rfc,
 				"action": "add"
 			}, function(data){
 				if (data.band == false)
@@ -27,7 +22,8 @@ TUsuario = function(){
 	};
 	
 	this.del = function(usuario, fn){
-		$.post('?mod=cusuarios&action=del', {
+		$.post('cusuarios', {
+			"action": "del",
 			"usuario": usuario,
 		}, function(data){
 			if (fn.after != undefined)

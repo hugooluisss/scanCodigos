@@ -11,8 +11,8 @@ if(!isset($_POST['movil']) and $_SERVER['SERVER_PORT'] == 80 and $ini['sistema']
 include('librerias/funciones.php');
 include_once("config.php");
 
-define("MODULO_DEFECTO", 'runnersregistro');
-define("MODULO_SESION_INICIADA", 'login');
+define("MODULO_DEFECTO", 'login');
+define("MODULO_SESION", 'route');
 define("SISTEMA", $ini['sistema']['acronimoEmpresa']);
 
 session_start();
@@ -28,7 +28,6 @@ date_default_timezone_set("America/Mexico_City");
 #librerias
 require('librerias/phpMailer/class.phpmailer.php');
 require('librerias/phpMailer/class.smtp.php');
-require('librerias/pushbots/PushBots.class.php');
 
 ini_set("include_path", ini_get("include_path").PATH_SEPARATOR.dirname(__FILE__)."/librerias/pear/");
 includeDir("clases/framework/");
@@ -74,12 +73,7 @@ $smarty->cache_dir = CACHE;
 $smarty->compile_dir = COMPILE;
 
 $userSesion = new TUsuario();
-$clienteSesion = new TCliente();
-
-if ($sesion['tipo'] == 1)
-	$userSesion = new TUsuario($sesion['usuario']);
-else
-	$clienteSesion = new TCliente($sesion['usuario']);
+$userSesion = new TUsuario(isset($_POST['movil'])?$_POST['usuario']:$sesion['usuario']);
 	
 $datosPlantilla = array(
 	"ruta" => DIR_PLANTILLAS."/",
@@ -101,10 +95,10 @@ $datosPlantilla = array(
 	"modulo" => $modulo,
 	"objModulo" => $objModulo,
 	"scriptsJS" => $objModulo->getScriptsJS(),
-	"usuario" => $sesion['tipo'] == 1?$userSesion:$clienteSesion,
+	"usuario" => $userSesion,
 	"inisistema" => $ini,
 	"url" => $ini['sistema']['url']);
-
+	
 foreach($_GET as $indice => $valor){
 	#$_GET[$indice] = ereg_replace('\\"', "",$_GET[$indice]);
 	#$_GET[$indice] = stripslashes($_GET[$indice]);

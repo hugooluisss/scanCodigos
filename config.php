@@ -6,26 +6,22 @@ define('EMAIL', 'hugooluisss@gmail.com');
 define('EMAILSOPORTE', 'hugooluisss@gmail.com');
 define('STATUS', 'En desarrollo');
 
-define('LAYOUT_FRONTEND', 'layout/frontend.tpl');
 define('LAYOUT_BACKEND', 'layout/backend.tpl');
-define('LAYOUT_BACKENDCLIENTE', 'layout/backend-cliente.tpl');
+define('LAYOUT_FRONTEND', 'layout/login.tpl');
 define('LAYOUT_AJAX', 'layout/update.tpl');
 define('LAYOUT_JSON', 'layout/json.tpl');
 
 #Login y su controlador
-$conf['runnersregistro'] = array(
-	'vista' => 'frontend/registroRunners.tpl',
-	'controlador' => 'frontend.php',
+$conf['muestra'] = array(
+	'vista' => 'inicio.tpl',
+	#'controlador' => 'frontend.php',
 	'titulo' => 'Bienvenido',
 	'descripcion' => 'Bienvenido',
 	'seguridad' => false,
-	'js' => array('runner.class.js'),
-	'jsTemplate' => array('runners.frontend.js'),
-	'capa' => LAYOUT_FRONTEND);
+	'capa' => LAYOUT_BACKEND);
 	
 $conf['login'] = array(
-	'vista' => 'frontend/login.tpl',
-	'controlador' => 'frontend.php',
+	'vista' => 'usuarios/login.tpl',
 	'titulo' => 'Inicio de sesión',
 	'descripcion' => 'Inicio de sesión',
 	'seguridad' => false,
